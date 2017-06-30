@@ -4,11 +4,29 @@ import {Provider as ReduxProvider} from 'react-redux'
 import './index.css';
 import App from './App';
 import reduxStore from './app/state/store'
+import router from './app/router'
+import {routingActions} from './app/state/ducks/routing'
 //import registerServiceWorker from './registerServiceWorker';
 
-ReactDOM.render((
-  <ReduxProvider store={reduxStore}>
-    <App />
-  </ReduxProvider>
-), document.getElementById('root'));
+async function render(component, element) {
+  return new Promise((resolve) => {
+    ReactDOM.render(component, element, (...args) => {
+      resolve(args)
+    })
+  })
+}
+
+async function init() {
+  await render((
+    <ReduxProvider store={reduxStore}>
+      <App />
+    </ReduxProvider>
+  ), document.getElementById('root'))
+
+  router.start('/home', () => {
+    reduxStore.dispatch(routingActions.started())
+  })
+}
 //registerServiceWorker();
+
+init()

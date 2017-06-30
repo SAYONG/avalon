@@ -3,9 +3,19 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "bulma": "^0.4.2",
+    "node-sass": "^4.5.3",
+    "polished": "^1.2.1",
+    "ramda": "^0.24.1",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
-    "react-scripts": "1.0.10"
+    "react-redux": "^5.0.5",
+    "react-scripts": "1.0.10",
+    "redux": "^3.7.1",
+    "redux-logger": "^3.0.6",
+    "redux-saga": "^0.15.4",
+    "router5": "^5.1.1",
+    "styled-components": "^2.1.0"
   },
   "scripts": {
     "start": "react-scripts start",

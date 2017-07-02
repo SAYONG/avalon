@@ -35,11 +35,6 @@ function configStore(initialState) {
     store.dispatch(action)
   })
 
-  firebaseAuth().getRedirectResult()
-  .then(result => {
-    console.debug('getRedirectResult', result)
-  })
-
   router.addNodeListener('', () => {
     const action = routingActions.nodeChange('')
     store.dispatch(action)

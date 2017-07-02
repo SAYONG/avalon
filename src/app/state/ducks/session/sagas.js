@@ -1,18 +1,25 @@
-import {takeLatest, take, call, put} from 'redux-saga/effects'
+import {takeLatest, take, call, put, all} from 'redux-saga/effects'
 
 import types from './types'
-import {routingActions} from '../routing'
+import {routingActions, routingTypes} from '../routing'
 import sessionApi from '../../../api/session'
 
+function* redirectUser(user) {
+  const next = user? 'lobby': 'signIn'
+  yield put(routingActions.navigate(next))
+}
+
 function* authStateChange() {
+  const [authStateChange, started] = yield all([
+    take(types.AUTH_STATE_CHANGE),
+    take(routingTypes.ROUTER_STARTED)
+  ])
+  const {user} = authStateChange.payload
+  yield* redirectUser(user)
   while (true) {
     const action = yield take(types.AUTH_STATE_CHANGE)
     const {user} = action.payload
-    if (user) {
-      yield put(routingActions.navigate('lobby'))
-    } else {
-      yield put(routingActions.navigate('signIn'))
-    }
+    yield redirectUser(user)
   }
 }
 

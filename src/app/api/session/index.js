@@ -8,3 +8,8 @@ export function signInWithFB() {
 export function signOut() {
   return firebaseAuth().signOut()
 }
+
+export default {
+  signInWithFB,
+  signOut
+}

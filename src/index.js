@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {Provider as ReduxProvider} from 'react-redux'
 import './index.css';
-import App from './App';
+import {Content} from './app/view';
 import reduxStore from './app/state/store'
 import router from './app/router'
 import {routingActions} from './app/state/ducks/routing'
@@ -19,7 +19,7 @@ async function render(component, element) {
 async function init() {
   await render((
     <ReduxProvider store={reduxStore}>
-      <App />
+      <Content />
     </ReduxProvider>
   ), document.getElementById('root'))
 

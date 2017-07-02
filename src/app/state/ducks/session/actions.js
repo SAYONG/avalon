@@ -7,6 +7,11 @@ const authStateChange = (user) => ({
   }
 })
 
+const requestFbSignIn = () => ({
+  type: types.REQUEST_FB_SIGN_IN
+})
+
 export default {
-  authStateChange
+  authStateChange,
+  requestFbSignIn
 }

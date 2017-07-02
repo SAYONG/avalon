@@ -1,4 +1,7 @@
-import {initializeApp as init} from 'firebase'
+import {
+  initializeApp as init,
+  auth
+} from 'firebase'
 
 var config = {
   apiKey: "AIzaSyB2xDlFyTa0quMLfPyhLit1jqU3iO6yOHg",
@@ -10,3 +13,6 @@ var config = {
 }
 
 init(config)
+
+export const fbProvider = new auth.FacebookAuthProvider()
+

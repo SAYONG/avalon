@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {Provider as ReduxProvider} from 'react-redux'
+
+import './firebase'
 import './index.css';
 import {Content} from './app/view';
 import reduxStore from './app/state/store'

@@ -8,6 +8,7 @@ import {routingLens} from '../state/ducks/routing'
 import {Lobby} from './lobby'
 import {Profile} from './profile'
 import {SignInForm} from './signIn'
+import {Starting} from './starting'
 
 const Container = styled.section`
 `
@@ -31,6 +32,8 @@ const Content_connected = connect(state => {
       return {view: <Profile />}
     case 'signIn':
       return {view: <SignInForm />}
+    case 'starting':
+      return {view: <Starting />}
 
     default: return {}
   }

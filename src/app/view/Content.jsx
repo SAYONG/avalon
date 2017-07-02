@@ -5,7 +5,7 @@ import R from 'ramda'
 
 import {routingLens} from '../state/ducks/routing'
 
-import {Home} from './home'
+import {Lobby} from './lobby'
 import {Profile} from './profile'
 
 const Container = styled.section`
@@ -24,8 +24,8 @@ const Content = (props) => {
 const Content_connected = connect(state => {
   const routeName = R.view(routingLens.currentStateNameLens, state.routing)
   switch (routeName) {
-    case 'home':
-      return {view: <Home />}
+    case 'lobby':
+      return {view: <Lobby />}
     case 'profile':
       return {view: <Profile />}
 

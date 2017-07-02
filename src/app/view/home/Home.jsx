@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 
-import {SignInForm} from '../profile'
+import {SignInForm} from '../signIn'
 
 const Home = (props) => {
   const {hasUser} = props

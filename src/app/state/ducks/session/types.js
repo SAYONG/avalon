@@ -1,0 +1,7 @@
+const AUTH_STATE_CHANGE = 'session/AUTH_STATE_CHANGE'
+const REQUEST_FB_SIGN_IN = 'session/REQUEST_FB_SIGN_IN'
+
+export default {
+  AUTH_STATE_CHANGE,
+  REQUEST_FB_SIGN_IN
+}

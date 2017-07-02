@@ -25,7 +25,7 @@ async function init() {
     </ReduxProvider>
   ), document.getElementById('root'))
 
-  router.start('/home', () => {
+  router.start('/starting', () => {
     reduxStore.dispatch(routingActions.started())
   })
 }

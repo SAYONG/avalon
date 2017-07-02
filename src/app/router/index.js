@@ -9,10 +9,11 @@ const createRoute = (name, path, children) => ({
 const routes = [
   createRoute('home', '/home'),
   createRoute('profile', '/profile'),
+  createRoute('starting', '/starting'),
 ]
 
 const options = {
-  defaultRoute: 'home'
+  defaultRoute: 'starting'
 }
 
 export const router = createRouter(routes, options)

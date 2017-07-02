@@ -11,7 +11,12 @@ const requestFbSignIn = () => ({
   type: types.REQUEST_FB_SIGN_IN
 })
 
+const signOut = () => ({
+  type: types.SIGN_OUT
+})
+
 export default {
   authStateChange,
-  requestFbSignIn
+  requestFbSignIn,
+  signOut
 }

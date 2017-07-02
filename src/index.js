@@ -4,7 +4,7 @@ import {Provider as ReduxProvider} from 'react-redux'
 
 import './firebase'
 import './index.css';
-import {Content} from './app/view';
+import {Content, Header} from './app/view';
 import reduxStore from './app/state/store'
 import router from './app/router'
 import {routingActions} from './app/state/ducks/routing'
@@ -25,7 +25,13 @@ async function init() {
     </ReduxProvider>
   ), document.getElementById('root'))
 
-  router.start('/home', () => {
+  await render((
+    <ReduxProvider store={reduxStore}>
+      <Header />
+    </ReduxProvider>
+  ), document.getElementById('header'))
+
+  router.start('/starting', () => {
     reduxStore.dispatch(routingActions.started())
   })
 }

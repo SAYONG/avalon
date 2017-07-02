@@ -2,11 +2,12 @@ import {createStore, applyMiddleware, combineReducers} from 'redux'
 import {createLogger} from 'redux-logger'
 import createSagaMiddleware from 'redux-saga'
 import {all, fork} from 'redux-saga/effects'
+import {auth as firebaseAuth} from 'firebase'
 
 import router from '../router'
 import ducks from './ducks'
 import {routingActions} from './ducks/routing'
-// import {actions as sessionActions} from './ducks/session'
+import {sessionActions} from './ducks/session'
 
 function* rootSaga() {
   yield all(ducks.sagas.map(saga => fork(saga)))
@@ -28,6 +29,11 @@ function configStore(initialState) {
   )
 
   sagaMiddleware.run(rootSaga)
+
+  firebaseAuth().onAuthStateChanged(user => {
+    const action = sessionActions.authStateChange(user)
+    store.dispatch(action)
+  })
 
   router.addNodeListener('', () => {
     const action = routingActions.nodeChange('')

@@ -19,7 +19,7 @@ function* authStateChange() {
   while (true) {
     const action = yield take(types.AUTH_STATE_CHANGE)
     const {user} = action.payload
-    yield redirectUser(user)
+    yield* redirectUser(user)
   }
 }
 

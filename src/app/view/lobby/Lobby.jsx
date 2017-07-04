@@ -9,8 +9,17 @@ const Lobby = (props) => {
   return (
     <div name="lobby">
       <h1>Create or Join the room</h1>
-      <input type="text" value={roomName} onChange={onRoomNameChange} />
-      <button onClick={onCreateRoomClick}>Create</button>
+      <div className="field">
+        <p className="control">
+          <label className="label">Room Name</label>
+          <input type="text"
+            className="input"
+            value={roomName}
+            onChange={onRoomNameChange} />
+        </p>
+      </div>
+      <button onClick={onCreateRoomClick}
+        className="button">Create</button>
     </div>
   )
 }

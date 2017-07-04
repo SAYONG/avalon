@@ -20,9 +20,15 @@
     "styled-components": "^2.1.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "npm-run-all -p watch-css start-js",
+    "start-js": "react-scripts start",
+    "build": "yarn css && react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "css": "node-sass src/index.scss -o src/",
+    "watch-css": "yarn css && node-sass src/index.scss -o src/ --watch"
+  },
+  "devDependencies": {
+    "npm-run-all": "^4.0.2"
   }
 }

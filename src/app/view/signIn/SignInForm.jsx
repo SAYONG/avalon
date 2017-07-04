@@ -8,7 +8,13 @@ const SignInForm = (props) => {
   const {onSignInFbClick} = props
   return (
     <div name="sign-in-form">
-      <button onClick={onSignInFbClick}>Sign in with Facebook</button>
+      <button onClick={onSignInFbClick}
+        className="button is-primary">
+        <span className="icon">
+          <i className="fa fa-facebook-f"></i>
+        </span>
+        <span>Sign in with Facebook</span>
+      </button>
     </div>
   )
 }

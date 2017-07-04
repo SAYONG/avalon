@@ -23,8 +23,24 @@ async function isRoomExist(pin) {
   })
 }
 
-export async function createNewRoom() {
-  const pin = generateRoomPin(getRandomIntInclusive)
-  const isExist = await isRoomExist(pin)
-  console.debug('createNewRoom: isRoomExist?', pin, isExist)
+async function findTheEmptyRoom() {
+  const find = () => {
+    const pin = generateRoomPin(getRandomIntInclusive)
+    return isRoomExist(pin)
+    .then(isExist => isExist? find(): pin)
+  }
+  return find()
+}
+
+async function updateRoom(pin, data) {
+  const ref = database().ref(`rooms/${pin}`)
+  return ref.set(data)
+}
+
+export async function createNewRoom(users) {
+  const pin = await findTheEmptyRoom()
+  const room = {
+    pin, players: users
+  }
+  return updateRoom(pin, room)
 }

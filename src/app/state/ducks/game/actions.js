@@ -1,10 +1,7 @@
 import types from './types'
 
-const createRoom = (roomName) => ({
-  type: types.CREATE_ROOM,
-  payload: {
-    roomName
-  }
+const createRoom = () => ({
+  type: types.CREATE_ROOM
 })
 
 export default {

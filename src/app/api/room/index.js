@@ -15,16 +15,16 @@ export function generateRoomPin(random) {
   )(`${randomValue}`)
 }
 
-export function createNewRoom(roomName) {
-  // 1. get available pin
-  // 2. construct room data
-  // 3. update firebase database
-  const rooms = database().ref('rooms')
-  const roomKey = rooms.push().key
-  return rooms.update({
-    [roomKey]: {
-      name: roomName,
-      pin: '2345' // TODO: Auto generate and check availability
-    }
+async function isRoomExist(pin) {
+  const ref = database().ref(`rooms/${pin}`)
+  return ref.once('value')
+  .then(snapshot => {
+    return !!snapshot.val()
   })
+}
+
+export async function createNewRoom() {
+  const pin = generateRoomPin(getRandomIntInclusive)
+  const isExist = await isRoomExist(pin)
+  console.debug('createNewRoom: isRoomExist?', pin, isExist)
 }

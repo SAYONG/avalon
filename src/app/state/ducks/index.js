@@ -1,5 +1,6 @@
 import routing from './routing'
 import session from './session'
+import game from './game'
 
 const reducers = Object.assign(
   {},
@@ -9,7 +10,8 @@ const reducers = Object.assign(
 
 const sagas = [].concat(
   routing.sagas,
-  session.sagas
+  session.sagas,
+  game.sagas
 )
 
 export default {

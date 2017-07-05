@@ -9,6 +9,7 @@ import {Lobby} from './lobby'
 import {Profile} from './profile'
 import {SignInForm} from './signIn'
 import {Starting} from './starting'
+import {Room} from './room'
 
 const Container = styled.section`
 `
@@ -34,6 +35,10 @@ const Content_connected = connect(state => {
       return {view: <SignInForm />}
     case 'starting':
       return {view: <Starting />}
+    case 'room':
+      const route = R.view(routingLens.currentStateLens, state.routing)
+      const {room} = route.params
+      return {view: <Room room={room} />}
 
     default: return {}
   }

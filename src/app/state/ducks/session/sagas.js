@@ -58,8 +58,10 @@ function* watchPlayerRoom() {
     const playerRoom = yield call(channels.playerRoom, user.uid)
     while (true) {
       // TODO: unsubscribe when user sign out
-      const data = yield take(playerRoom)
-      console.debug('room change', data)
+      const {room} = yield take(playerRoom)
+      if (room) {
+        yield put(routingActions.navigate('room', {room}))
+      }
     }
   }
 }

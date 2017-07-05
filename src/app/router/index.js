@@ -11,6 +11,7 @@ const routes = [
   createRoute('profile', '/profile'),
   createRoute('starting', '/starting'),
   createRoute('lobby', '/lobby'),
+  createRoute('room', '/room/:room'),
 ]
 
 const options = {

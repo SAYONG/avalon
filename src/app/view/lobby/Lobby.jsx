@@ -11,6 +11,17 @@ const Lobby = (props) => {
       <h1>Create or Join the room</h1>
       <button onClick={onCreateRoomClick}
         className="button">Create</button>
+      <div className="field has-addons">
+        <p className="control">
+          <input type="text" className="input"
+            placeholder="4-Digits Pin"/>
+        </p>
+        <p className="control">
+          <a className="button is-primary">
+            Join
+          </a>
+        </p>
+      </div>
     </div>
   )
 }

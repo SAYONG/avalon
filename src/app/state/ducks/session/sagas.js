@@ -1,6 +1,8 @@
 import {takeLatest, take, call, put, all} from 'redux-saga/effects'
 
 import types from './types'
+import actions from './actions'
+import channels from './channels'
 import {routingActions, routingTypes} from '../routing'
 import sessionApi from '../../../api/session'
 
@@ -38,8 +40,36 @@ function* signOut() {
   }
 }
 
+function* watchUserExistence() {
+  while (true) {
+    const action = yield take(types.AUTH_STATE_CHANGE)
+    if (action.payload.user) {
+      yield put(actions.userExist(action.payload.user))
+    } else {
+      yield put(actions.noUser())
+    }
+  }
+}
+
+function* watchPlayerRoom() {
+  while (true) {
+    const action = yield take(types.USER_EXIST)
+    const {user} = action.payload
+    const playerRoom = yield call(channels.playerRoom, user.uid)
+    while (true) {
+      // TODO: unsubscribe when user sign out
+      const {room} = yield take(playerRoom)
+      if (room) {
+        yield put(routingActions.navigate('room', {room}))
+      }
+    }
+  }
+}
+
 export default [
   authStateChange,
   signOut,
-  watchFbSignIn
+  watchFbSignIn,
+  watchUserExistence,
+  watchPlayerRoom
 ]

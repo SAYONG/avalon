@@ -37,10 +37,14 @@ async function updateRoom(pin, data) {
   return ref.set(data)
 }
 
-export async function createNewRoom(users) {
+export async function createNewRoom(player) {
   const pin = await findTheEmptyRoom()
   const room = {
-    pin, players: users
+    pin, players: [player]
   }
-  return updateRoom(pin, room)
+  const updates = {
+    [`rooms/${pin}`]: room,
+    [`user-room/${player.uid}`]: pin
+  }
+  return database().ref().update(updates)
 }

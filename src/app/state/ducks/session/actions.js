@@ -15,8 +15,21 @@ const signOut = () => ({
   type: types.SIGN_OUT
 })
 
+const userExist = (user) => ({
+  type: types.USER_EXIST,
+  payload: {
+    user
+  }
+})
+
+const noUser = () => ({
+  type: types.NO_USER
+})
+
 export default {
   authStateChange,
   requestFbSignIn,
-  signOut
+  signOut,
+  userExist,
+  noUser
 }

@@ -19,8 +19,28 @@ const joiningRoomNotExist = (room) => ({
   }
 })
 
+const roomChange = (room) => ({
+  type: types.ROOM_CHANGE,
+  payload: {
+    room
+  }
+})
+
+/**
+ * 
+ * @param {Object[]} players 
+ */
+const roomPlayersChange = (players) => ({
+  type: types.ROOM_PLAYERS_CHANGE,
+  payload: {
+    players
+  }
+})
+
 export default {
   createRoom,
   joinRoom,
-  joiningRoomNotExist
+  joiningRoomNotExist,
+  roomChange,
+  roomPlayersChange
 }

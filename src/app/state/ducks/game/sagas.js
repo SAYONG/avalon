@@ -49,6 +49,7 @@ function* roomChangeSaga() {
     yield put(routingActions.navigate('room', {room}))
     const roomPlayers = yield call(channels.roomPlayers, room)
     while (true) {
+      // TODO: exist this loop when user leave the room
       const {players} = yield take(roomPlayers)
       const playersArray = R.values(players)
       yield put(actions.roomPlayersChange(playersArray))

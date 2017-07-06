@@ -47,6 +47,11 @@ function* roomChangeSaga() {
   while (true) {
     const {payload: {room}} = yield take(types.ROOM_CHANGE)
     yield put(routingActions.navigate('room', {room}))
+    const roomPlayers = yield call(channels.roomPlayers, room)
+    while (true) {
+      const {players} = yield take(roomPlayers)
+      console.debug('Players of room', room, players)
+    }
   }
 }
 

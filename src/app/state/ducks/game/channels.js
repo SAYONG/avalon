@@ -22,6 +22,7 @@ function roomPlayers(room) {
       emitter({room, players: snapshot.val()})
     }
     const ref = database().ref(`room-players/${room}`)
+    .orderByKey()
     ref.on('value', onChange)
     return () => {
       ref.off('value', onChange)

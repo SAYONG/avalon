@@ -5,7 +5,8 @@ import game from './game'
 const reducers = Object.assign(
   {},
   routing.reducer,
-  session.reducer
+  session.reducer,
+  game.reducer
 )
 
 const sagas = [].concat(

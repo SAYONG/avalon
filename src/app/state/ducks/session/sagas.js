@@ -5,6 +5,7 @@ import actions from './actions'
 import channels from './channels'
 import {routingActions, routingTypes} from '../routing'
 import sessionApi from '../../../api/session'
+import gameApi from '../../../api/game'
 
 function* redirectUser(user) {
   const next = user? 'lobby': 'signIn'
@@ -51,6 +52,15 @@ function* watchUserExistence() {
   }
 }
 
+function* registerOnlinePlayerSaga() {
+  while (true) {
+    const action = yield take(types.USER_EXIST)
+    const {user} = action.payload
+    const player = yield call(gameApi.userToPlayer, user)
+    yield call(gameApi.registerOnlinePlayer, player)
+  }
+}
+
 function* watchPlayerRoom() {
   while (true) {
     const action = yield take(types.USER_EXIST)
@@ -71,5 +81,6 @@ export default [
   signOut,
   watchFbSignIn,
   watchUserExistence,
-  watchPlayerRoom
+  watchPlayerRoom,
+  registerOnlinePlayerSaga
 ]

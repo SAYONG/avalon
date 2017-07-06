@@ -39,7 +39,8 @@ const Lobby_composed = compose(
     onCreateRoomClick: ({createRoom}) => () => {
       createRoom()
     },
-    onJoinRoomSubmit: ({joinRoom, room}) => () => {
+    onJoinRoomSubmit: ({joinRoom, room}) => (event) => {
+      event.preventDefault()
       joinRoom(room)
     }
   })

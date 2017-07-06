@@ -45,6 +45,7 @@ export async function createNewRoom(player) {
 }
 
 export async function joinRoom(player, room) {
+  console.debug('joinRoom', player, room)
   const updates = {
     [`player-room/${player.uid}`]: room
   }

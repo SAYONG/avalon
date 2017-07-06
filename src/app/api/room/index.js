@@ -44,7 +44,14 @@ export async function createNewRoom(player) {
   }
   const updates = {
     [`rooms/${pin}`]: room,
-    [`user-room/${player.uid}`]: pin
+    [`player-room/${player.uid}`]: pin
+  }
+  return database().ref().update(updates)
+}
+
+export async function joinRoom(player, room) {
+  const updates = {
+    [`player-room/${player.uid}`]: room
   }
   return database().ref().update(updates)
 }

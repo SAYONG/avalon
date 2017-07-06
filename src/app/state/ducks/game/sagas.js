@@ -50,7 +50,8 @@ function* roomChangeSaga() {
     const roomPlayers = yield call(channels.roomPlayers, room)
     while (true) {
       const {players} = yield take(roomPlayers)
-      console.debug('Players of room', room, players)
+      const playersArray = R.values(players)
+      yield put(actions.roomPlayersChange(playersArray))
     }
   }
 }

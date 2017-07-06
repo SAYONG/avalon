@@ -26,9 +26,21 @@ const roomChange = (room) => ({
   }
 })
 
+/**
+ * 
+ * @param {Object[]} players 
+ */
+const roomPlayersChange = (players) => ({
+  type: types.ROOM_PLAYERS_CHANGE,
+  payload: {
+    players
+  }
+})
+
 export default {
   createRoom,
   joinRoom,
   joiningRoomNotExist,
-  roomChange
+  roomChange,
+  roomPlayersChange
 }

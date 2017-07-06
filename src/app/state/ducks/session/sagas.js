@@ -2,7 +2,6 @@ import {takeLatest, take, call, put, all} from 'redux-saga/effects'
 
 import types from './types'
 import actions from './actions'
-import {gameChannels} from '../game'
 import {routingActions, routingTypes} from '../routing'
 import sessionApi from '../../../api/session'
 import gameApi from '../../../api/game'
@@ -59,22 +58,6 @@ function* registerOnlinePlayerSaga() {
     const {user} = action.payload
     const player = yield call(gameApi.userToPlayer, user)
     yield call(gameApi.registerOnlinePlayer, player)
-  }
-}
-
-// TODO: remove this saga
-function* watchPlayerRoom() {
-  while (true) {
-    const action = yield take(types.USER_EXIST)
-    const {user} = action.payload
-    const playerRoom = yield call(gameChannels.playerRoom, user.uid)
-    while (true) {
-      // TODO: unsubscribe when user sign out
-      const {room} = yield take(playerRoom)
-      if (room) {
-        yield put(routingActions.navigate('room', {room}))
-      }
-    }
   }
 }
 

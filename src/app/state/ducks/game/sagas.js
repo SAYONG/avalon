@@ -7,6 +7,7 @@ import channels from './channels'
 import {createNewRoom, joinRoom, isRoomExist} from '../../../api/room'
 import {userToPlayer} from '../../../api/game'
 import {sessionLens, sessionTypes} from '../session'
+import {routingActions} from '../routing'
 
 function* createRoom() {
   while (true) {
@@ -35,11 +36,23 @@ function* playerRoomSaga() {
   while (true) {
     const {payload: {user}} = yield take(sessionTypes.USER_EXIST)
     const playerRoom = yield call(channels.playerRoom, user.uid)
+    while (true) {
+      const {room} = yield take(playerRoom)
+      yield put(actions.roomChange(room))
+    }
+  }
+}
+
+function* roomChangeSaga() {
+  while (true) {
+    const {payload: {room}} = yield take(types.ROOM_CHANGE)
+    yield put(routingActions.navigate('room', {room}))
   }
 }
 
 export default [
   createRoom,
   joinRoomSaga,
-  playerRoomSaga
+  playerRoomSaga,
+  roomChangeSaga
 ]

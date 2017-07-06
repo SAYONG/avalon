@@ -16,6 +16,20 @@ function playerRoom(uid) {
   })
 }
 
+function roomPlayers(room) {
+  return eventChannel(emitter => {
+    const onChange = snapshot => {
+      emitter({room, players: snapshot.val()})
+    }
+    const ref = database().ref(`room-players/${room}`)
+    ref.on('value', onChange)
+    return () => {
+      ref.off('value', onChange)
+    }
+  })
+}
+
 export default {
-  playerRoom
+  playerRoom,
+  roomPlayers
 }

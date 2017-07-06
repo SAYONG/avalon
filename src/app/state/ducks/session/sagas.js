@@ -44,7 +44,8 @@ function* signOut() {
 function* watchUserExistence() {
   while (true) {
     const action = yield take(types.AUTH_STATE_CHANGE)
-    if (action.payload.user) {
+    const {user} = action.payload
+    if (user) {
       yield put(actions.userExist(action.payload.user))
     } else {
       yield put(actions.noUser())
@@ -61,6 +62,7 @@ function* registerOnlinePlayerSaga() {
   }
 }
 
+// TODO: remove this saga
 function* watchPlayerRoom() {
   while (true) {
     const action = yield take(types.USER_EXIST)
@@ -81,6 +83,5 @@ export default [
   signOut,
   watchFbSignIn,
   watchUserExistence,
-  watchPlayerRoom,
   registerOnlinePlayerSaga
 ]

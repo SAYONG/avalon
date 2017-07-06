@@ -3,9 +3,10 @@ import {take, call, select, put} from 'redux-saga/effects'
 
 import types from './types'
 import actions from './actions'
+import channels from './channels'
 import {createNewRoom, joinRoom, isRoomExist} from '../../../api/room'
 import {userToPlayer} from '../../../api/game'
-import {sessionLens} from '../session'
+import {sessionLens, sessionTypes} from '../session'
 
 function* createRoom() {
   while (true) {
@@ -30,7 +31,15 @@ function* joinRoomSaga() {
   }
 }
 
+function* playerRoomSaga() {
+  while (true) {
+    const {payload: {user}} = yield take(sessionTypes.USER_EXIST)
+    const playerRoom = yield call(channels.playerRoom, user.uid)
+  }
+}
+
 export default [
   createRoom,
-  joinRoomSaga
+  joinRoomSaga,
+  playerRoomSaga
 ]

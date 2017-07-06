@@ -10,6 +10,11 @@ import router from './app/router'
 import {routingActions} from './app/state/ducks/routing'
 //import registerServiceWorker from './registerServiceWorker';
 
+import Raven from 'raven-js'
+Raven
+    .config('https://6de9e0627af64ec6892f132a04c62625@sentry.io/188598')
+    .install()
+
 async function render(component, element) {
   return new Promise((resolve) => {
     ReactDOM.render(component, element, (...args) => {

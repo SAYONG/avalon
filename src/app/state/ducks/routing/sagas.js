@@ -4,6 +4,7 @@ import router from '../../../router'
 import types from './types'
 
 export function* navigate(action) {
+  console.debug('navigate', action)
   const {to, params, options} = action.payload
   yield call(router.navigate, to, params, options)
 }

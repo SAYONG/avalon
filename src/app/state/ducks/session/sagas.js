@@ -12,7 +12,7 @@ function* redirectUser(user) {
 }
 
 function* authStateChange() {
-  const [authStateChange, started] = yield all([
+  const [authStateChange,] = yield all([
     take(types.AUTH_STATE_CHANGE),
     take(routingTypes.ROUTER_STARTED)
   ])

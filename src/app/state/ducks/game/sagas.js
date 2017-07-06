@@ -8,7 +8,7 @@ import {sessionLens} from '../session'
 
 function* createRoom() {
   while (true) {
-    const action = yield take(types.CREATE_ROOM)
+    yield take(types.CREATE_ROOM)
     const user = yield select(state => R.view(sessionLens.userLens, state.session))
     const player = yield call(userToPlayer, user)
     yield call(createNewRoom, player)

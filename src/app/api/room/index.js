@@ -32,11 +32,6 @@ async function findTheEmptyRoom() {
   return find()
 }
 
-async function updateRoom(pin, data) {
-  const ref = database().ref(`rooms/${pin}`)
-  return ref.set(data)
-}
-
 export async function createNewRoom(player) {
   const pin = await findTheEmptyRoom()
   const room = {

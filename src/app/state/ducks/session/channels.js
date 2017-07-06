@@ -7,7 +7,7 @@ function playerRoom(uid) {
     const onRoomChange = snapshot => {
       emitter({room: snapshot.val()})
     }
-    const ref = database().ref(`user-room/${uid}`)
+    const ref = database().ref(`player-room/${uid}`)
     ref.on('value', onRoomChange)
 
     return () => {

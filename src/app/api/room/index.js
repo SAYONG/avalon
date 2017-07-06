@@ -15,7 +15,7 @@ export function generateRoomPin(random) {
   )(`${randomValue}`)
 }
 
-async function isRoomExist(pin) {
+export async function isRoomExist(pin) {
   const ref = database().ref(`rooms/${pin}`)
   return ref.once('value')
   .then(snapshot => {
@@ -32,11 +32,6 @@ async function findTheEmptyRoom() {
   return find()
 }
 
-async function updateRoom(pin, data) {
-  const ref = database().ref(`rooms/${pin}`)
-  return ref.set(data)
-}
-
 export async function createNewRoom(player) {
   const pin = await findTheEmptyRoom()
   const room = {
@@ -44,7 +39,16 @@ export async function createNewRoom(player) {
   }
   const updates = {
     [`rooms/${pin}`]: room,
-    [`user-room/${player.uid}`]: pin
+    [`player-room/${player.uid}`]: pin
+  }
+  return database().ref().update(updates)
+}
+
+export async function joinRoom(player, room) {
+  const playerKey = database().ref(`room-players/${room}`).push().key
+  const updates = {
+    [`player-room/${player.uid}`]: room,
+    [`room-players/${room}/${playerKey}`]: player
   }
   return database().ref().update(updates)
 }

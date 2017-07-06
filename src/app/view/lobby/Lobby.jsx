@@ -20,9 +20,9 @@ const Lobby = (props) => {
               placeholder="4-Digits Pin"/>
           </p>
           <p className="control">
-            <a className="button is-primary">
+            <button className="button is-primary">
               Join
-            </a>
+            </button>
           </p>
         </div>
       </form>

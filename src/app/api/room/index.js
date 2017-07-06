@@ -15,7 +15,7 @@ export function generateRoomPin(random) {
   )(`${randomValue}`)
 }
 
-async function isRoomExist(pin) {
+export async function isRoomExist(pin) {
   const ref = database().ref(`rooms/${pin}`)
   return ref.once('value')
   .then(snapshot => {

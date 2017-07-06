@@ -11,7 +11,16 @@ const joinRoom = (room) => ({
   }
 })
 
+const joiningRoomNotExist = (room) => ({
+  type: types.JOINING_ROOM_NOT_EXIST,
+  error: true,
+  payload: {
+    room
+  }
+})
+
 export default {
   createRoom,
-  joinRoom
+  joinRoom,
+  joiningRoomNotExist
 }

@@ -52,3 +52,7 @@ export async function joinRoom(player, room) {
   }
   return database().ref().update(updates)
 }
+
+export async function leaveRoom(player, room) {
+
+}

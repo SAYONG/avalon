@@ -7,9 +7,15 @@ const roomChangeReducer = (state, action) => {
   return R.set(lens.roomLens, room, state)
 }
 
+const roomPlayerToState = (player, key) => ({...player, key})
+
 const roomPlayersChangeReducer = (state, action) => {
   const {players} = action.payload
-  return R.set(lens.roomPlayersLens, players, state)
+  const playersState = R.pipe(
+    R.mapObjIndexed(roomPlayerToState),
+    R.values
+  )(players)
+  return R.set(lens.roomPlayersLens, playersState, state)
 }
 
 const reducer = (state = {}, action) => {

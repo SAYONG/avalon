@@ -1,5 +1,5 @@
 import R from 'ramda'
-import {take, call, select, put} from 'redux-saga/effects'
+import {take, call, select, put, race} from 'redux-saga/effects'
 
 import types from './types'
 import actions from './actions'
@@ -51,9 +51,20 @@ function* roomChangeSaga() {
       yield put(routingActions.navigate('room', {room}))
       const roomPlayers = yield call(channels.roomPlayers, room)
       while (true) {
-        // TODO: exist this loop when user leave the room
-        const {players} = yield take(roomPlayers)
-        yield put(actions.roomPlayersChange(players))
+        const {playersData, leaveRoom} = yield race({
+          playersData: take(roomPlayers),
+          leaveRoom: take(types.LEAVE_ROOM)
+        })
+
+        if (playersData) {
+          yield put(actions.roomPlayersChange(playersData.players))
+        } else {
+          roomPlayers.close()
+          const {payload: {room, player}} = leaveRoom
+          yield call(roomApi.leaveRoom, room, player.uid, player.key)
+          yield put(routingActions.navigate('lobby'))
+          break
+        }
       }
     }
   }
@@ -71,6 +82,5 @@ export default [
   createRoom,
   joinRoomSaga,
   playerRoomSaga,
-  roomChangeSaga,
-  leaveRoomSaga
+  roomChangeSaga
 ]

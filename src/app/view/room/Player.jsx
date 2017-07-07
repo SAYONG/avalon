@@ -6,16 +6,29 @@ const Container = styled.div`
   align-items: center;
 `
 const Img = styled.img`
+  width: 60px;
   border-radius: 50%;
   margin-right: 1rem;
 `
+const InfoContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+`
 
 const Player = (props) => {
-  const {player} = props
+  const {player, isUser} = props
   return (
     <Container>
       <Img src={player.photoURL} />
-      <span>{player.displayName}</span>
+      <InfoContainer>
+        <span>{player.displayName}</span>
+        {isUser && (
+        <a className="button is-danger is-small">
+          Leave
+        </a>
+        )}
+      </InfoContainer>
     </Container>
   )
 }

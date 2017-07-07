@@ -26,14 +26,17 @@ const roomChange = (room) => ({
   }
 })
 
-/**
- * 
- * @param {Object[]} players 
- */
 const roomPlayersChange = (players) => ({
   type: types.ROOM_PLAYERS_CHANGE,
   payload: {
     players
+  }
+})
+
+const leaveRoom = (room, player) => ({
+  type: types.LEAVE_ROOM,
+  payload: {
+    room, player
   }
 })
 
@@ -42,5 +45,6 @@ export default {
   joinRoom,
   joiningRoomNotExist,
   roomChange,
-  roomPlayersChange
+  roomPlayersChange,
+  leaveRoom
 }

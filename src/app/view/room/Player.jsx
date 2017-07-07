@@ -1,5 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
+import PropTypes from 'prop-types'
+import {compose, withHandlers} from 'recompose'
 
 const Container = styled.div`
   display: flex;
@@ -17,14 +19,16 @@ const InfoContainer = styled.div`
 `
 
 const Player = (props) => {
-  const {player, isUser} = props
+  const {player, isUser,
+    onLeaveClick} = props
   return (
     <Container>
       <Img src={player.photoURL} />
       <InfoContainer>
         <span>{player.displayName}</span>
         {isUser && (
-        <a className="button is-danger is-small">
+        <a className="button is-danger is-small"
+          onClick={onLeaveClick}>
           Leave
         </a>
         )}
@@ -33,4 +37,18 @@ const Player = (props) => {
   )
 }
 
-export default Player
+const Player_composed = compose(
+  withHandlers({
+    onLeaveClick: ({player, onPlayerLeave}) => () => {
+      onPlayerLeave(player)
+    }
+  })
+)(Player)
+
+Player_composed.propTypes = {
+  player: PropTypes.object.isRequired,
+  isUser: PropTypes.bool,
+  onPlayerLeave: PropTypes.func.isRequired
+}
+
+export default Player_composed

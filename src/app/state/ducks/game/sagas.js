@@ -6,6 +6,7 @@ import actions from './actions'
 import channels from './channels'
 import {createNewRoom, joinRoom, isRoomExist} from '../../../api/room'
 import {userToPlayer} from '../../../api/game'
+import roomApi from '../../../api/room'
 import {sessionLens, sessionTypes} from '../session'
 import {routingActions} from '../routing'
 
@@ -58,9 +59,18 @@ function* roomChangeSaga() {
   }
 }
 
+function* leaveRoomSaga() {
+  while (true) {
+    const {payload: {room, player}} = yield take(types.LEAVE_ROOM)
+    yield call(roomApi.leaveRoom, room, player.uid, player.key)
+    yield put(routingActions.navigate('lobby'))
+  }
+}
+
 export default [
   createRoom,
   joinRoomSaga,
   playerRoomSaga,
-  roomChangeSaga
+  roomChangeSaga,
+  leaveRoomSaga
 ]

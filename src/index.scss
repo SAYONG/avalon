@@ -1,4 +1,4 @@
-$primary: #FFC107;
+$primary: #1E88E5;
 
 $fa-font-path: "font-awesome/fonts";
 @import "font-awesome/scss/font-awesome.scss";
@@ -16,6 +16,10 @@ body {
 #root {
   flex: 1;
   display: flex;
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: 'Average', serif;
 }
 
 .nav-item a.is-active, a.nav-item.is-active {

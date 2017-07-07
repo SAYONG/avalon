@@ -10,8 +10,17 @@ import {Profile} from './profile'
 import {SignInForm} from './signIn'
 import {Starting} from './starting'
 import {Room} from './room'
+import Header from './Header'
 
 const Container = styled.section`
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+`
+const ViewsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 `
 
 const Content = (props) => {
@@ -28,9 +37,19 @@ const Content_connected = connect(state => {
   const routeName = R.view(routingLens.currentStateNameLens, state.routing)
   switch (routeName) {
     case 'lobby':
-      return {view: <Lobby />}
+      return {view: (
+        <ViewsContainer>
+          <Header />
+          <Lobby />
+        </ViewsContainer>
+      )}
     case 'profile':
-      return {view: <Profile />}
+      return {view: (
+        <ViewsContainer>
+          <Header />
+          <Profile />
+        </ViewsContainer>
+      )}
     case 'signIn':
       return {view: <SignInForm />}
     case 'starting':
@@ -38,7 +57,12 @@ const Content_connected = connect(state => {
     case 'room':
       const route = R.view(routingLens.currentStateLens, state.routing)
       const {room} = route.params
-      return {view: <Room room={room} />}
+      return {view: (
+        <ViewsContainer>
+          <Header />
+          <Room room={room} />
+        </ViewsContainer>
+      )}
 
     default: return {}
   }

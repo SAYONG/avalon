@@ -35,11 +35,13 @@ async function findTheEmptyRoom() {
 export async function createNewRoom(player) {
   const pin = await findTheEmptyRoom()
   const room = {
-    pin, players: [player]
+    pin
   }
+  const playerKey = database().ref(`room-players/${pin}`).push().key
   const updates = {
     [`rooms/${pin}`]: room,
-    [`player-room/${player.uid}`]: pin
+    [`player-room/${player.uid}`]: pin,
+    [`room-players/${pin}/${playerKey}`]: player
   }
   return database().ref().update(updates)
 }
@@ -51,4 +53,17 @@ export async function joinRoom(player, room) {
     [`room-players/${room}/${playerKey}`]: player
   }
   return database().ref().update(updates)
+}
+
+export async function leaveRoom(room, playerUid, playerKey) {
+  const updates = {
+    [`player-room/${playerUid}`]: null,
+    [`room-players/${room}/${playerKey}`]: null
+  }
+  return database().ref().update(updates)
+}
+
+export default {
+  joinRoom,
+  leaveRoom
 }

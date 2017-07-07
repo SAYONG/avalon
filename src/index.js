@@ -4,7 +4,7 @@ import {Provider as ReduxProvider} from 'react-redux'
 
 import './firebase'
 import './index.css';
-import {Content, Header} from './app/view';
+import {Content} from './app/view';
 import reduxStore from './app/state/store'
 import router from './app/router'
 import {routingActions} from './app/state/ducks/routing'

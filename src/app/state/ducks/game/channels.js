@@ -1,5 +1,4 @@
 import {eventChannel} from 'redux-saga'
-// TODO: refactor to API?
 import {database} from 'firebase'
 
 function playerRoom(uid) {

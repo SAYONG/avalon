@@ -12,6 +12,9 @@ import {Starting} from './starting'
 import {Room} from './room'
 
 const Container = styled.section`
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 `
 
 const Content = (props) => {

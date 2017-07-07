@@ -30,12 +30,6 @@ async function init() {
     </ReduxProvider>
   ), document.getElementById('root'))
 
-  await render((
-    <ReduxProvider store={reduxStore}>
-      <Header />
-    </ReduxProvider>
-  ), document.getElementById('header'))
-
   router.start('/starting', () => {
     reduxStore.dispatch(routingActions.started())
   })

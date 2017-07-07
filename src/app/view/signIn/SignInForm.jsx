@@ -1,21 +1,45 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {compose, withHandlers} from 'recompose'
+import styled from 'styled-components'
 
 import {sessionActions} from '../../state/ducks/session'
+import {blue600} from '../base/colors'
+
+const Container = styled.div`
+  flex: 1;
+  background-color: ${blue600};
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`
+const SignInButton = styled.button`
+  background-color: white;
+  color: ${blue600};
+`
+const Logo = styled.h1`
+  color: white;
+`
 
 const SignInForm = (props) => {
   const {onSignInFbClick} = props
   return (
-    <div name="sign-in-form">
-      <button onClick={onSignInFbClick}
-        className="button is-primary">
+    <Container name="sign-in-form">
+      <Logo className="title">
+        <span className="icon">
+          <i className="fa fa-shield"></i>
+        </span>
+        <span>Avalonia</span>
+      </Logo>
+      <SignInButton onClick={onSignInFbClick}
+        className="button">
         <span className="icon">
           <i className="fa fa-facebook-f"></i>
         </span>
         <span>Sign in with Facebook</span>
-      </button>
-    </div>
+      </SignInButton>
+    </Container>
   )
 }
 

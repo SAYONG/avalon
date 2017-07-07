@@ -70,14 +70,6 @@ function* roomChangeSaga() {
   }
 }
 
-function* leaveRoomSaga() {
-  while (true) {
-    const {payload: {room, player}} = yield take(types.LEAVE_ROOM)
-    yield call(roomApi.leaveRoom, room, player.uid, player.key)
-    yield put(routingActions.navigate('lobby'))
-  }
-}
-
 export default [
   createRoom,
   joinRoomSaga,
